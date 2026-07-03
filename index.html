@@ -311,6 +311,108 @@
     }
 
     .now-card p { font-size: 0.9rem; color: var(--dusk); line-height: 1.6; }
+    /* NEWS & ACTIVITIES */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .news-item {
+      padding: 1.5rem 1.6rem;
+      background: var(--sand);
+      border: 1px solid var(--light-line);
+      border-left: 3px solid var(--terracotta);
+      border-radius: 0.8rem;
+      overflow: hidden;
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+
+    .news-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--shadow); }
+
+    .news-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 0.5rem;
+      background: rgba(181,84,29,0.12);
+      color: var(--terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .news-toggle {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1rem 1.3rem;
+      align-items: start;
+      background: none;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+      font: inherit;
+    }
+
+    .news-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--moss);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+
+    .news-toggle h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--bark);
+      margin-bottom: 0.35rem;
+    }
+
+    .news-summary {
+      font-size: 0.9rem;
+      color: var(--dusk);
+      line-height: 1.65;
+    }
+
+    .news-chevron {
+      color: var(--terracotta);
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      transition: transform 0.22s;
+    }
+
+    .news-item.open .news-chevron { transform: rotate(180deg); }
+
+    .news-details {
+      display: none;
+      margin: 1rem 0 0 57px;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(61,43,31,0.10);
+      color: var(--dusk);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .news-item.open .news-details { display: block; }
+
+    .news-details p,
+    .news-details li { margin-bottom: 0.55rem; }
+
+    .news-details ul {
+      padding-left: 1.1rem;
+    }
+
+    .news-details .link-btn {
+      margin-top: 0.6rem;
+      display: inline-flex;
+    }
 
     /* ── PROJECTS ── */
     .projects-grid {
@@ -430,38 +532,6 @@
     .timeline-item p { font-size: 0.88rem; color: var(--dusk); line-height: 1.65; }
     .timeline-item .tag { margin-top: 0.5rem; }
 
-    /* ── PAPERS ── */
-    .papers-list { display: flex; flex-direction: column; gap: 1.2rem; }
-
-    .paper-item {
-      padding: 1.4rem 1.6rem;
-      background: var(--sand);
-      border-radius: 0.75rem;
-      border-left: 3px solid var(--terracotta);
-      transition: all 0.22s;
-    }
-
-    .paper-item:hover { transform: translateX(5px); box-shadow: 0 6px 20px var(--shadow); }
-
-    .paper-item h3 {
-      font-family: 'Lora', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--bark);
-      margin-bottom: 0.3rem;
-    }
-
-    .paper-meta {
-      font-size: 0.82rem;
-      color: var(--dusk);
-      margin-bottom: 0.4rem;
-    }
-
-    .paper-note {
-      font-size: 0.82rem;
-      color: var(--moss);
-      font-style: italic;
-    }
 
     /* ── PRESENTATIONS ── */
     .pres-grid {
@@ -671,6 +741,9 @@
       .hero-links { justify-content: center; }
       .social-icons { justify-content: center; }
       section { padding: 3.5rem 1.5rem; }
+      .news-toggle { grid-template-columns: 1fr auto; }
+      .news-icon { display: none; }
+      .news-details { margin-left: 0; }
       .contact-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -682,9 +755,9 @@
   <a class="nav-logo" href="#hero">Vishnu Hemanth</a>
   <ul class="nav-links" id="nav-links">
     <li><a href="#now">Now</a></li>
+    <li><a href="#news">News & Activities</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#presentations">Resources</a></li>
-    <li><a href="#papers">Papers</a></li>
     <li><a href="#ta">Teaching</a></li>
     <li><a href="#publications">Publications</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -698,16 +771,19 @@
 <section id="hero">
   <div class="hero-bg-circle"></div>
   <div class="hero-text">
-    <div class="hero-tag">🎓 M.Tech · IIT Hyderabad</div>
+    <div class="hero-tag">🎓 M.Tech(RA) · IIT Hyderabad</div>
     <h1>Vishnu<br><span>Hemanth</span></h1>
     <p class="hero-subtitle">Research Assistant · Artificial Intelligence</p>
     <p class="hero-bio">
-      M.Tech student at IIT Hyderabad, working as a Research Assistant in Artificial Intelligence.
-      Interested in Machine Learning, Deep Learning, and building real-world AI systems.
+      I am 3rd year M.Tech Research Assistant(RA) student working under the guidance of <a href="https://sites.google.com/view/ganeshghalme/home?authuser=" target="_blank">
+Dr. Ganesh Ghalme
+</a> in the Department of Artificial Intelligence.
+      Interested in Machine Learning, Deep Learning, and building real-world Trustable AI systems.
+      Currently I am working in Trustworthy AI for Finance as part of my thesis.
       Actively seeking opportunities to grow in research and industry.
     </p>
     <div class="hero-links">
-      <a href="mailto:vishnuhemanthcp@email.com" class="btn btn-primary"><i class="fas fa-envelope"></i> Get in Touch</a>
+      <a href="mailto:vishnuhemanthcp@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> Get in Touch</a>
       <!-- UPDATE: Replace # with your actual CV PDF link when ready -->
       <a href="#" class="btn btn-outline"><i class="fas fa-file-alt"></i> CV / Resume</a>
     </div>
@@ -752,7 +828,7 @@
       <div class="now-card">
         <div class="now-card-icon">🛠️</div>
         <h3>Building</h3>
-        <p> Currently Interested in theoretical aspects of Deep Learning Theory, working towards building foundations for it.</p>
+        <p> Currently Interested in theoretical aspects of Deep Learning Theory, Fairness in AI working towards building foundations for it.</p>
       </div>
       <div class="now-card">
         <div class="now-card-icon">🎯</div>
@@ -763,6 +839,85 @@
   </div>
 </section>
 
+
+<!-- NEWS & ACTIVITIES -->
+<section id="news">
+  <div class="reveal">
+    <p class="section-label">// updates</p>
+    <h2>News & Activities</h2>
+    <div class="section-divider"></div>
+    <div class="news-list">
+      <article class="news-item">
+        <button class="news-toggle" type="button" aria-expanded="false">
+          <div class="news-icon"><i class="fas fa-scale-balanced"></i></div>
+          <div>
+            <div class="news-date">June 16-19, 2026</div>
+            <h3>Foundations of Ethical AI Workshop</h3>
+            <p class="news-summary">
+              Attended a workshop on trustworthy, responsible, and ethical AI at IIIT Hyderabad.
+            </p>
+          </div>
+          <i class="fas fa-chevron-down news-chevron" aria-hidden="true"></i>
+        </button>
+        <div class="news-details">
+          <p>
+            Attended the Foundations of Ethical AI workshop at IIIT Hyderabad, jointly organized by
+            IIIT Hyderabad and IIT Hyderabad. The workshop covered the foundations of trustworthy,
+            responsible, and ethical AI.
+          </p>
+        </div>
+      </article>
+
+      <article class="news-item">
+        <button class="news-toggle" type="button" aria-expanded="false">
+          <div class="news-icon"><i class="fas fa-chart-line"></i></div>
+          <div>
+            <div class="news-date">November 2025 - Present</div>
+            <h3>AI for Finance, Economies and Societies (AIFES)</h3>
+            <p class="news-summary">
+              Active member of the AIFES reading group, presenting and studying quantitative finance foundations.
+            </p>
+          </div>
+          <i class="fas fa-chevron-down news-chevron" aria-hidden="true"></i>
+        </button>
+        <div class="news-details">
+          <ul>
+            <li>Active member of the AIFES reading group.</li>
+            <li>Deliver weekly technical presentations on quantitative finance and stochastic processes.</li>
+            <li>Studying the mathematical foundations of the Black-Scholes model through research papers and textbook discussions.</li>
+            <li>Topics covered include stochastic processes, martingales, Brownian motion, geometric Brownian motion, Ito calculus, and change of measure.</li>
+          </ul>
+          <a href="https://ai-iith-web.github.io/AIFES" target="_blank" rel="noopener" class="link-btn">
+            <i class="fas fa-external-link-alt"></i> Visit AIFES
+          </a>
+        </div>
+      </article>
+
+      <article class="news-item">
+        <button class="news-toggle" type="button" aria-expanded="false">
+          <div class="news-icon"><i class="fas fa-users-gear"></i></div>
+          <div>
+            <div class="news-date">January 2026</div>
+            <h3>Student Organizer - India Pre-AI Summit</h3>
+            <p class="news-summary">
+              Served as one of the principal student organizers for the India Pre-AI Summit at IIT Hyderabad.
+            </p>
+          </div>
+          <i class="fas fa-chevron-down news-chevron" aria-hidden="true"></i>
+        </button>
+        <div class="news-details">
+          <ul>
+            <li>Served as one of the principal student organizers for the India Pre-AI Summit held at IIT Hyderabad.</li>
+            <li>Assisted in the planning, coordination, and execution of the event.</li>
+          </ul>
+          <a href="https://www.youtube.com/live/OoXAFWQ2q7o?si=3sMrrnv543ayU6Lg" target="_blank" rel="noopener" class="link-btn">
+            <i class="fas fa-external-link-alt"></i> View Event
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 <!-- ── PROJECTS ── -->
 <section id="projects">
   <div class="reveal">
@@ -858,32 +1013,6 @@
   </div>
 </section>
 
-<!-- ── PAPERS ── -->
-<section id="papers">
-  <div class="reveal">
-    <p class="section-label">// reading</p>
-    <h2>Papers I've Read</h2>
-    <div class="section-divider"></div>
-    <div class="papers-list">
-
-      <!-- UPDATE: Add papers you've read — title, authors, venue, and your takeaway -->
-      <div class="paper-item">
-        <h3>Attention Is All You Need</h3>
-        <p class="paper-meta">Vaswani et al. · NeurIPS 2017</p>
-     <!--   <p class="paper-note">My takeaway: Transformers changed everything — self-attention is a remarkably clean mechanism for modelling sequences.</p> --!>
-      </div>
-<!--
-      <div class="paper-item">
-        <h3>Paper Title Two</h3>
-        <p class="paper-meta">Author Name et al. · Conference / Journal · Year</p>
-        <p class="paper-note">My takeaway: [One sentence on what you found interesting or useful.]</p>
-      </div>
---!>
-    
-    </div>
-  </div>
-</section>
-  
 <!-- ── TEACHING ASSISTANTSHIP ── -->
 <section id="ta">
   <div class="reveal">
@@ -913,7 +1042,7 @@
       <div>
         <h3>AI for Humanity</h3>
         <p>IIT Hyderabad · Jan 2026 – Apr 2026</p>
-        <p style="margin-top:0.3rem; font-size:0.83rem; color:var(--dusk);"> - .</p>
+        <p style="margin-top:0.3rem; font-size:0.83rem; color:var(--dusk);"> Helped in conducting and evaluating exams.</p>
       </div>
     </div>
 
@@ -965,7 +1094,7 @@
 
     <!-- UPDATE: Add your actual publications. If you have none yet, you can remove this section or keep it as "coming soon" -->
     <p style="color:var(--dusk); font-style:italic; font-size:0.92rem;">
-      Publications coming soon. Currently working on manuscripts from ongoing research at IIT Hyderabad.
+      Giving my best efforts to publish my research work in reputed conferences and journals. Stay tuned for updates!
     </p>
 
     <!--
@@ -1035,6 +1164,14 @@
     });
   }, { threshold: 0.1 });
   revealEls.forEach(el => observer.observe(el));
+  // News & activities dropdowns
+  document.querySelectorAll('.news-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.news-item');
+      const isOpen = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
 
   // Timeline toggle
   document.querySelectorAll('.timeline-toggle').forEach(btn => {

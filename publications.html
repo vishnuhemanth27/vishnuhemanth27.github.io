@@ -1,32 +1,40 @@
----
-layout: default
-title : Publications
-navbar_title: Publications
-body_attr: >-
-  data-spy="scroll" data-target="#navbar-year" data-offset="100"
----
-
-{% assign pubs_by_year = site.publications | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
-
-<div class="row">
-    <div class="col-12 col-lg-10">
-        {% for year in pubs_by_year %}
-        {% assign num_papers = year.items | size %}
-        <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>
-        <div class="my-0 p-0 bg-white shadow-sm rounded-xl">
-            {% for item in year.items %}
-                {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
-            {% endfor %}
-        </div>
-        {% endfor %}
-    </div>
-
-    <div class="col-2 d-none d-lg-block">
-        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 80px">
-            {% for year in pubs_by_year %}
-            <a class="nav-link d-block" href="#year-{{ year.name }}">{{ year.name }}</a>
-            {% endfor %}
-        </div>
-    </div>
-
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications - Vishnu Hemanth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/portfolio.css">
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">Vishnu Hemanth</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="now.html">Now</a></li><li><a href="news.html">News</a></li><li><a href="projects.html">Projects</a></li><li><a href="resources.html">Resources</a></li><li><a href="teaching.html">Teaching</a></li><li><a class="active" href="publications.html">Publications</a></li><li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" type="button" aria-label="Open navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
+  </nav>
+  <main>
+    <section class="page-section">
+      <div class="page-header reveal">
+        <p class="section-label">// research</p>
+        <h2>Publications</h2>
+        <p class="page-intro">Research work and publication updates.</p>
+        <div class="section-divider"></div>
+      </div>
+      <div class="reveal">
+        <article class="pub-item">
+          <h3>Research publications coming soon</h3>
+          <p>Giving my best efforts to publish my research work in reputed conferences and journals. Stay tuned for updates.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer><p>&copy; 2026 Vishnu Hemanth . <a href="https://github.com/vishnuhemanth27">vishnuhemanth27</a></p></footer>
+  <script src="assets/js/portfolio.js"></script>
+</body>
+</html>
